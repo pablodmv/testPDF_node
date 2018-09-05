@@ -99,20 +99,66 @@ exports.getWCResults = function (req,res) {
 
 
 exports.toPdf = function(req, res){
-  var html = fs.readFileSync('./public/test.html', 'utf8');
+  //var html = fs.readFileSync('./public/test.html', 'utf8');
   var options = { format: 'Letter' };
+  var info = {
+    "company": "Cualquiera inc",
+    "name": "pablito"
+  }
+//  var html = "<h1> hola que tal </h1>"
 
-//  pdf.create(html, options).toFile('./businesscard.pdf', function(err, res) {
-//    if (err) return console.log(err);
-//    console.log(res); // { filename: '/app/businesscard.pdf' }
-//  });
+//   '<!DOCTYPE html>' .
+// '  <html lang="en" dir="ltr">'.
+// '    <head>'.
+// '      <meta charset="utf-8">'
+// '      <title></title>'
+//   '  </head>'
+// '    <body>'
+// '      <h1> hello pdf </h1>'
+//   '  <table>'
+//   '  <tr>Company</tr>'
+// '  {{{company}}}'
+//   '  <tr>Team</tr>'
+//   '  {compn}'
+//   '  </table>'
+//  '  </body>'
+//   '</html>'
+//console.log(html);
 
-pdf.create(html).toStream(function(err, stream){
-  if (err) return res.end(err.stack)
-   res.setHeader('Content-Type', 'application/pdf')
-   stream.pipe(res)
-//  stream.pipe(fs.createWriteStream('./foo.pdf'));
-});
+
+
+// var html = res.render('./pages/index.ejs');
+// pdf.create(html).toStream(function(err, stream){
+//   if (err) return res.end(err.stack)
+//    res.setHeader('Content-Type', 'application/pdf')
+//    stream.pipe(res)
+// });
+
+
+res.render('./pages/index.ejs', {
+    info: info,
+}, function (err, HTML) {
+    pdf.create(HTML, options).toFile('./employee.pdf', function (err, result) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        }
+    })
+  })
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

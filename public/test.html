@@ -1,10 +1,26 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+      body {
+        font-family: "Helvetica Neue", sans-serif;
+        background: #F0F0F0;
+        color: #333;
+      }
+      * {
+        border: 0;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
   </head>
   <body>
-    <h1> hello pdf </h1>
+    <div id="pageHeader">Header</div>
+    <div id="pageContent">Failed to execute. This must be a bug.</div>
+    <div id="pageFooter">Footer</div>
+    <script>
+        window.jQuery("#pageContent").text("Hello world!");
+    </script>
   </body>
 </html>
